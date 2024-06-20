@@ -1,3 +1,16 @@
+import sys
+import os
+
+# Determine the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the relative path to the parent directory
+parent_dir = os.path.join(script_dir, '..')
+
+# Add the parent directory to the system path
+sys.path.append(parent_dir)
+
+
 from colors import bcolors
 
 
