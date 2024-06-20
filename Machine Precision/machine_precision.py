@@ -27,6 +27,12 @@ if __name__ == '__main__':
     m_eps = machine_epsilon()
     print(bcolors.OKBLUE, "Machine Precision  : ", m_eps, bcolors.ENDC)
 
+    realmax = sys.float_info.max
+    realmin = sys.float_info.min
+
+    print(bcolors.OKBLUE, "Maximum representable float (realmax): ", realmax, bcolors.ENDC)
+    print(bcolors.OKBLUE, "Minimum positive representable float (realmin): ", realmin, bcolors.ENDC)
+
     expression = abs(3.0 * (4.0 / 3.0 - 1) - 1)
     print("\nResult of abs(3.0 * (4.0 / 3.0 - 1) - 1) :")
     print(bcolors.FAIL, "before using machine epsilon: {}".format(expression), bcolors.ENDC)
