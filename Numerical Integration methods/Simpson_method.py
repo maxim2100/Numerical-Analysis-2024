@@ -1,31 +1,23 @@
 import math
-import numpy as np
-import matplotlib.pyplot as plt
 
-import sympy as sp
-
-from colors import bcolors
-from sympy.utilities.lambdify import lambdify
-x = sp.symbols('x')
 def simpsons_rule(f, a, b, n):
     """
-    Simpson's Rule for Numerical Integration
+    חישוב אינטגרל מסוים באמצעות שיטת סימפסון.
 
-    Parameters:
-    f (function): The function to be integrated.
-    a (float): The lower limit of integration.
-    b (float): The upper limit of integration.
-    n (int): The number of subintervals (must be even).
+    פרמטרים:
+    f (function): פונקציה הניתנת לאינטגרציה.
+    a (float): גבול תחתון של האינטגרל.
+    b (float): גבול עליון של האינטגרל.
+    n (int): מספר תתי-המקטעים (חייב להיות זוגי).
 
-    Returns:
-    float: The approximate definite integral of the function over [a, b].
+    החזרת ערך:
+    float: קירוב לערך האינטגרל המסוים של הפונקציה בטווח [a, b].
     """
     if n % 2 != 0:
-        raise ValueError("Number of subintervals (n) must be even for Simpson's Rule.")
+        n += 1  # הבטחת n זוגי
 
     h = (b - a) / n
-
-    integral = f(a) + f(b)  # Initialize with endpoints
+    integral = f(a) + f(b)  # תרומת נקודות הקצה
 
     for i in range(1, n):
         x_i = a + i * h
@@ -34,18 +26,17 @@ def simpsons_rule(f, a, b, n):
         else:
             integral += 4 * f(x_i)
 
-    integral *= h / 3
+    return integral * (h / 3)
 
-    return integral
-
+def f(x):
+    denominator = (2 * x) ** 3 + 5 * x ** 2 - 6
+    if denominator == 0:
+        return 0  # מניעת חלוקה באפס
+    return math.sin(2 * math.e ** (-2 * x)) / denominator
 
 if __name__ == '__main__':
-    f = lambda x: math.e ** (x ** 2)
-    n = 10
-    a=0
-    b=1
-
-    print( f" Division into n={n} sections ")
-    integral = simpsons_rule(f, 0, 1, n)
-    print(bcolors.OKBLUE, f"Numerical Integration of definite integral in range [{a},{b}] is {integral}", bcolors.ENDC)
-
+    a, b = -0.5, 0.5
+    n = 100  # מספר חיתוכים (זוגי)
+    
+    result = simpsons_rule(f, a, b, n)
+    print(f"Approximate integral using Simpson's rule: {result}")
