@@ -6,6 +6,7 @@ from Numerical_Integration_methods.Simpson_method import simpsons_rule
 from Numerical_Integration_methods.Trapezoidal_method import trapezoidal_rule
 from src.machine_precision.machine_precision import machine_epsilon
 from src.matrices.matrix_operations import MatrixOperations
+from Interpolation_and_Polynomial_Approximation.linear_interpolation import linearInterpolation
 import numpy as np
 import math
 
@@ -84,6 +85,9 @@ def LU(A,b):
     print("LU [x,y,z]:", ans,"\n")
 
 if __name__ == '__main__':
+
+
+    print("==========================Q11==========================")
     # q11
     f = lambda x: (x * math.exp(-x) + math.log(x**2)) * (2*x**3 + 2*x**2 - 3*x - 5)
     df = lambda x: ((math.exp(-x) - x * math.exp(-x) + 2/x) * (2*x**3 + 2*x**2 - 3*x - 5) +
@@ -111,16 +115,16 @@ if __name__ == '__main__':
             roots.append(root)
         print(f"\nFinal approximated roots: {roots}")
     # q21
-
+    print("==========================Q21==========================")
     matrix=[[1,0.5,0.333],[0.5,0.333,0.25],[0.333,0.25,0.2]]
     A = [[1,0.5,0.333],[0.5,0.333,0.25],[0.333,0.25,0.2]]
     b = [1,0,0]
 
     GaussianElimination(A,b,3)
-    # LU(matrix,b)
+    
     print("Gauss Seidel [x,y,z]:",gauss_seidel(matrix,b))
     # q10
-
+    print("==========================Q10==========================")
     a, b = -0.5, 0.5
     n = 100  # מספר חיתוכים (זוגי)
     def g(x):
@@ -137,7 +141,7 @@ if __name__ == '__main__':
 
 
     # q25
-
+    print("==========================Q25==========================")
     matrix=[[2,1,0],[3,-1,0],[1,4,-2]]
     A = [[2,1,0],[3,-1,0],[1,4,-2]]
     b = [-3,1,-5]
@@ -146,6 +150,7 @@ if __name__ == '__main__':
 
 
     # q3
+    print("==========================Q3==========================")
     def f(x):
         return math.cos(x**2 + 5*x + 6) / (2 * math.exp(-x))
 
@@ -198,6 +203,14 @@ if __name__ == '__main__':
 
 
     # q38
+    print("==========================Q38==========================")
+    table_points = [(6.5, 2.14451), (6.7, 2.35585), (7.0, 2.74748), (8.0, 5.67127)]
+    x = 6.9
+    print( "----------------- Interpolation & Extrapolation Methods -----------------\n")
+    print( "Table Points: ", table_points)
+    print( "Finding an approximation to the point: ",  x)
+    linearInterpolation(table_points, x)
+    print( "\n---------------------------------------------------------------------------\n")
     
 
 
