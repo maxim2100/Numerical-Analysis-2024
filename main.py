@@ -7,6 +7,7 @@ from Numerical_Integration_methods.Trapezoidal_method import trapezoidal_rule
 from src.machine_precision.machine_precision import machine_epsilon
 from src.matrices.matrix_operations import MatrixOperations
 from Interpolation_and_Polynomial_Approximation.linear_interpolation import linearInterpolation
+from Interpolation_and_Polynomial_Approximation.polynomial_interpolation import polynomialInterpolation
 import numpy as np
 import math
 
@@ -206,11 +207,16 @@ if __name__ == '__main__':
     print("==========================Q38==========================")
     table_points = [(6.5, 2.14451), (6.7, 2.35585), (7.0, 2.74748), (8.0, 5.67127)]
     x = 6.9
-    print( "----------------- Interpolation & Extrapolation Methods -----------------\n")
+    print( "----------------- linearInterpolation -----------------\n")
     print( "Table Points: ", table_points)
     print( "Finding an approximation to the point: ",  x)
     linearInterpolation(table_points, x)
     print( "\n---------------------------------------------------------------------------\n")
-    
+    print( "----------------- polynomialInterpolation -----------------\n")
+    print( "Table Points: ", table_points)
+    print( "Finding an approximation to the point: ", x,'\n')
+    polynomialInterpolation(table_points, x)
+    print( "\n---------------------------------------------------------------------------\n")
+
 
 
