@@ -75,11 +75,11 @@ def SolveLU(matrix, vector):
 
 def solveMatrix(matrixA,vectorb):
     detA = Determinant(matrixA, 1)
-    print(bcolors.YELLOW, "\nDET(A) = ", detA)
+    print("\nDET(A) = ", detA)
 
     if detA != 0:
-        print("CondA = ", Cond(matrixA, InverseMatrix(matrixA, vectorb)), bcolors.ENDC)
-        print(bcolors.OKBLUE, "\nnon-Singular Matrix - Perform GaussJordanElimination",bcolors.ENDC)
+        print("CondA = ", Cond(matrixA, InverseMatrix(matrixA, vectorb)))
+        print( "\nnon-Singular Matrix - Perform GaussJordanElimination")
         result = GaussJordanElimination(matrixA, vectorb)
         print(np.array(result))
         return result
@@ -100,24 +100,24 @@ def polynomialInterpolation(table_points, x):
 
     b = [[point[1]] for point in table_points]
 
-    print(bcolors.OKBLUE, "The matrix obtained from the points: ", bcolors.ENDC,'\n', np.array(matrix))
-    print(bcolors.OKBLUE, "\nb vector: ", bcolors.ENDC,'\n',np.array(b))
+    print("The matrix obtained from the points: ",'\n', np.array(matrix))
+    print( "\nb vector: ",'\n',np.array(b))
     matrixSol = solveMatrix(matrix, b)
 
     result = sum([matrixSol[i][0] * (x ** i) for i in range(len(matrixSol))])
-    print(bcolors.OKBLUE, "\nThe polynom:", bcolors.ENDC)
+    print("\nThe polynom:")
     print('P(X) = '+'+'.join([ '('+str(matrixSol[i][0])+') * x^' + str(i) + ' ' for i in range(len(matrixSol))])  )
-    print(bcolors.OKGREEN, f"\nThe Result of P(X={x}) is:", bcolors.ENDC)
+    print( f"\nThe Result of P(X={x}) is:")
     print(result)
     return result
 
 
 if __name__ == '__main__':
 
-    table_points = [(0, 0), (1, 0.8415), (2, 0.9093), (3, 0.1411), (4, -0.7568), (5, -0.9589), (6, -0.2794)]
-    x = 1.28
-    print(bcolors.OKBLUE, "----------------- Interpolation & Extrapolation Methods -----------------\n", bcolors.ENDC)
-    print(bcolors.OKBLUE, "Table Points: ", bcolors.ENDC, table_points)
-    print(bcolors.OKBLUE, "Finding an approximation to the point: ", bcolors.ENDC, x,'\n')
+    table_points = [(6.5, 2.14451), (6.7, 2.35585), (7.0, 2.74748), (8.0, 5.67127)]
+    x = 6.9
+    print( "----------------- Interpolation & Extrapolation Methods -----------------\n")
+    print( "Table Points: ", table_points)
+    print( "Finding an approximation to the point: ", x,'\n')
     polynomialInterpolation(table_points, x)
-    print(bcolors.OKBLUE, "\n---------------------------------------------------------------------------\n", bcolors.ENDC)
+    print( "\n---------------------------------------------------------------------------\n")

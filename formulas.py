@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 
 def formula_1(L):
     return 4.86 + 0.018 * L
@@ -24,10 +25,26 @@ data = {
     38: int(2.61 * 350)
 }
 
-for question, answer in data.items():
-    print("\n--------------------------\nQuestion", question)
-    print(f"formula_1: {formula_1(answer)} defects")
-    print(f"formula_2: {formula_2(answer)} defects")
-    print(f"formula_3: {formula_3(answer)} defects")
-    print(f"formula_4: {formula_4(answer)} defects")
-    print(f"formula_5: {formula_5(answer)} defects")
+L_values = list(data.values())
+D1 = [formula_1(L) for L in L_values]
+D2 = [formula_2(L) for L in L_values]
+D3 = [formula_3(L) for L in L_values]
+D4 = [formula_4(L) for L in L_values]
+D5 = [formula_5(L) for L in L_values]
+
+plt.figure(figsize=(10, 6))
+plt.plot(L_values, D1, marker='o', linestyle='-', label="Formula 1")
+plt.plot(L_values, D2, marker='s', linestyle='--', label="Formula 2")
+plt.plot(L_values, D3, marker='^', linestyle='-.', label="Formula 3")
+plt.plot(L_values, D4, marker='d', linestyle=':', label="Formula 4")
+plt.plot(L_values, D5, marker='x', linestyle='-', label="Formula 5")
+
+plt.xlabel("L Values")
+plt.ylabel("Defects (D)")
+plt.title("Defects (D) vs. L for Different Formulas")
+plt.legend()
+plt.xscale("linear") 
+plt.yscale("log")  
+plt.grid(True, which="both", linestyle="--", linewidth=0.5)
+
+plt.show()
