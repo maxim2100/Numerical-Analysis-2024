@@ -2,6 +2,8 @@ from Iterative_methods.newtonRaphson import newton_raphson
 from Iterative_methods.bisection_method import bisection_method, find_root_intervals
 from Methods_for_Solving_Linear_Systems_of_Equations.Jacobi_and_Gauss_Seidel import gauss_seidel
 from Matrix.matrix_tool_2 import find_L_matrix,print_matrix,inverse_matrix,solve_system_with_LU,multiply_matrix_vector
+from Numerical_Integration_methods.Simpson_method import simpsons_rule
+from Numerical_Integration_methods.Trapezoidal_method import trapezoidal_rule
 from src.machine_precision.machine_precision import machine_epsilon
 from src.matrices.matrix_operations import MatrixOperations
 import numpy as np
@@ -115,8 +117,32 @@ if __name__ == '__main__':
     b = [1,0,0]
 
     GaussianElimination(A,b,3)
-    LU(matrix,b)
+    # LU(matrix,b)
     print("Gauss Seidel [x,y,z]:",gauss_seidel(matrix,b))
+    # q10
+
+    a, b = -0.5, 0.5
+    n = 100  # מספר חיתוכים (זוגי)
+    def g(x):
+        denominator = (2 * x) ** 3 + 5 * x ** 2 - 6
+        if denominator == 0:
+            return 0  # מניעת חלוקה באפס
+        return math.sin(2 * math.e ** (-2 * x)) / denominator
+    result = simpsons_rule(g, a, b, n)
+    print(f"Approximate integral using Simpson's rule: {result}")
+    result = trapezoidal_rule(g, a, b, n)
+    print("Approximate integral:", result)
+
+
+
+
+    # q25
+
+    matrix=[[2,1,0],[3,-1,0],[1,4,-2]]
+    A = [[2,1,0],[3,-1,0],[1,4,-2]]
+    b = [-3,1,-5]
+    GaussianElimination(A,b,3)
+    LU(matrix,b)
 
 
     # q3
@@ -169,3 +195,6 @@ if __name__ == '__main__':
         print(f"\nThe smallest root found overall: {smallest_root}")
     else:
         print("\nNo roots found in any method.")
+
+
+    # q38
